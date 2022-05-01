@@ -485,7 +485,7 @@ the wine color and quality plots to determine the actual vs. predicted
 groupings.We will visualize the various relationships of various
 features and how well K-Means++ has clustered the labels.
 
-![](wine_files/figure-markdown_github/unnamed-chunk-4-1.png)
+![](wine_files/figure-markdown_github/unnamed-chunk-4-1.png)![](wine_files/figure-markdown_github/unnamed-chunk-4-2.png)![](wine_files/figure-markdown_github/unnamed-chunk-4-3.png)![](wine_files/figure-markdown_github/unnamed-chunk-4-4.png)
 
 Above, we observe various feature relationships in two dimensions.
 Unfortunately, observing all 11 features in 11 dimensions would be quite
@@ -495,7 +495,7 @@ par. The nice component of this analysis is the interpretability. There
 seems to be a relatively clear distinction between red and white wines,
 and the features represented here strongly indicate association
 
-![](wine_files/figure-markdown_github/unnamed-chunk-5-1.png)
+![](wine_files/figure-markdown_github/unnamed-chunk-5-1.png)![](wine_files/figure-markdown_github/unnamed-chunk-5-2.png)![](wine_files/figure-markdown_github/unnamed-chunk-5-3.png)![](wine_files/figure-markdown_github/unnamed-chunk-5-4.png)
 
 Observing the same relationships but for wine quality, we see the
 interpretations are substantially more ambiguous and perhaps even
@@ -731,6 +731,7 @@ pH and alcohol are positive. PC3 is similar but still different from
 PC1.
 
 ![](wine_files/figure-markdown_github/unnamed-chunk-9-1.png)![](wine_files/figure-markdown_github/unnamed-chunk-9-2.png)
+
 As the clustering methods showed, the color of the wine is easily
 separated by principle components and they are easily distinguished. We
 can also make the same conclusion about the quality level of wine

@@ -18,6 +18,7 @@ library(ggpubr)
 library(factoextra)
 library(ggcorrplot)
 library(ggfortify)
+library(patchwork)
 wine = read.csv("/Users/karlo/Desktop/Graduate_School/Spring_2022/Data_Mining/wine.csv")
 set.seed(1234)
 
@@ -89,22 +90,28 @@ As we can see above, these are the center points (or centroids) for both cluster
 a1=qplot(fixed.acidity, volatile.acidity, data = wine, color = factor(clust_color_pp$cluster), alpha = 0.8)
 a2=qplot(fixed.acidity, volatile.acidity, data = wine, color = color, alpha = 0.8)
 
+a1+a2
+
 # Comparing Citric Acid levels and pH balance and how it relates to color of wine
 b1=qplot(citric.acid, pH, data = wine, color = factor(clust_color_pp$cluster), alpha = 0.8)
 b2=qplot(citric.acid, pH, data = wine, color = color, alpha = 0.8)
+
+b1+b2
 
 # Comparing Free and Total Sulfur Dioxide and how it relates to color of wine
 c1=qplot(free.sulfur.dioxide, total.sulfur.dioxide, data = wine, color = factor(clust_color_pp$cluster), alpha = 0.8)
 c2=qplot(free.sulfur.dioxide, total.sulfur.dioxide, data = wine, color = color, alpha = 0.8)
 
+c1+c2
 # Comparing Alcohol and Sulphates and how it relates to color of wine
 d1=qplot(alcohol, sulphates, data = wine, color = factor(clust_color_pp$cluster), alpha = 0.8)
 d2=qplot(alcohol, sulphates, data = wine, color = color, alpha = 0.8)
 
+d1+d2
 
-ggarrange(a1,a2,b1,b2,c1,c2,d1,d2,
-          labels = c("Acidities Clustered","Acidities by Color", "Citric Acid v. pH Clustered", "Citric Acid v. pH by Color","Free Sulfur v. Total Sulfur Clustered","Free Sulfur v. Total Sulfur by Color", "Alcohol v. Sulphates Clustered", "Alcohol v. Sulphates by Color"),
-          ncol = 2, nrow = 4)
+#ggarrange(a1,a2,b1,b2,c1,c2,d1,d2,
+          #labels = c("Acidities Clustered","Acidities by Color", "Citric Acid v. pH Clustered", "Citric Acid v. pH by Color","Free Sulfur v. Total Sulfur Clustered","Free Sulfur v. Total Sulfur by Color", "Alcohol v. Sulphates Clustered", "Alcohol v. Sulphates by Color"),
+         # ncol = 2, nrow = 4)
 ```
 
 Above, we observe various feature relationships in two dimensions. Unfortunately, observing all 11 features in 11 dimensions would be quite ambiguous and tedious. We see here that the interpretation of K-Means++ clustering relative to the actual wine color groupings are rather on par. The nice component of this analysis is the interpretability. There seems to be a relatively clear distinction between red and white wines, and the features represented here strongly indicate association
@@ -116,22 +123,23 @@ Above, we observe various feature relationships in two dimensions. Unfortunately
 a11=qplot(fixed.acidity, volatile.acidity, data = wine, color = factor(clust_quality_pp$cluster), alpha = 0.8)
 a22=qplot(fixed.acidity, volatile.acidity, data = wine, color = factor(quality), alpha = 0.8)
 
+a11+a22
 # Comparing Citric Acid levels and pH balance and how it relates to wine quality
 b11=qplot(citric.acid, pH, data = wine, color = factor(clust_quality_pp$cluster), alpha = 0.8)
 b22=qplot(citric.acid, pH, data = wine, color = factor(quality), alpha = 0.8)
-
+b11+b22
 # Comparing Free and Total Sulfur Dioxide and how it relates to wine quality
 c11=qplot(free.sulfur.dioxide, total.sulfur.dioxide, data = wine, color = factor(clust_quality_pp$cluster), alpha = 0.8)
 c22=qplot(free.sulfur.dioxide, total.sulfur.dioxide, data = wine, color = factor(quality), alpha = 0.8)
-
+c11+c22
 # Comparing Alcohol and Sulphates and how it relates to wine quality
 d11=qplot(alcohol, sulphates, data = wine, color = factor(clust_quality_pp$cluster), alpha = 0.8)
 d22=qplot(alcohol, sulphates, data = wine, color = factor(quality), alpha = 0.8)
 
-
-ggarrange(a11,a22,b11,b22,c11,c22,d11,d22,
-          labels = c("Acidities Clustered","Acidities by Quality", "Citric Acid v. pH Clustered", "Citric Acid v. pH by Quality","Free Sulfur v. Total Sulfur Clustered","Free Sulfur v. Total Sulfur by Quality", "Alcohol v. Sulphates Clustered", "Alcohol v. Sulphates by Quality"),
-          ncol = 2, nrow = 4)
+d11+d22
+#ggarrange(a11,a22,b11,b22,c11,c22,d11,d22,
+         # labels = c("Acidities Clustered","Acidities by Quality", "Citric Acid v. pH Clustered", "Citric Acid v. pH by Quality","Free Sulfur v. Total Sulfur Clustered","Free #Sulfur v. Total Sulfur by Quality", "Alcohol v. Sulphates Clustered", "Alcohol v. Sulphates by Quality"),
+          #ncol = 2, nrow = 4)
 ```
 
 Observing the same relationships but for wine quality, we see the interpretations are substantially more ambiguous and perhaps even difficult to distinguish. Thus, wine quality is ambiguous. This makes sense relative to how easily K-Means++ clustering grouped reds and whites. A logical insinuation could be that color has a strong association with the chemical process grapes undergo to evidently make wine. Quality, however, was measured by wine tasting - a subjective feature. Judges rating the quality of the wine certainly have personal preferences. Thus, when attempting to cluster by quality level and observing the various feature relationships, it is difficult to distinguish what relationships among the features imply something about the quality.
@@ -168,6 +176,7 @@ autoplot(PCAwine, data = wine, colour = 'quality', alpha = 0.8,
          loadings = TRUE, loadings.colour = 'pink',
          loadings.label = TRUE, loadings.label.size = 3)
 ```
+
 As the clustering methods showed, the color of the wine is easily separated by principle components and they are easily distinguished. We can also make the same conclusion about the quality level of wine (i.e. - it is ambiguous). By consolidating the features for each data point, the principle component does a great job at associating the linear summaries for color of wine.
 
 
